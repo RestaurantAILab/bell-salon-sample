@@ -1,18 +1,18 @@
-// BELL v2: タイ時間で営業状況を表示する（data-status の要素に書き込む）。
+// BELL v3: タイ時間で今日の受付状況を表示する（data-status の要素に書き込む）。
 (function () {
   var STORE = {
     timeZone: "Asia/Bangkok",
-    // 0=日 … 6=土。null は定休日。
-    hours: { 0: ["09:00", "21:00"], 1: ["09:00", "21:00"], 2: ["09:00", "18:00"], 3: null,
-             4: ["09:00", "21:00"], 5: ["09:00", "21:00"], 6: ["09:00", "21:00"] },
+    // 受付時間（最終受付まで）。0=日 … 6=土。null は定休日。公式サイトのフッター記載に合わせる。
+    hours: { 0: ["09:00", "18:30"], 1: ["09:00", "18:30"], 2: ["09:00", "14:00"], 3: null,
+             4: ["09:00", "18:30"], 5: ["09:00", "18:30"], 6: ["09:00", "18:30"] },
     closedThursdays: [2, 4]
   };
   var lang = document.documentElement.lang === "en" ? "en" : "ja";
   var T = {
-    ja: { open: "ただいま営業中", before: "本日は {o} から営業", after: "本日の受付は終了しました", closed: "本日は定休日です",
-          hours: "（タイ時間 {o}〜{c}）", closedSub: "（LINE の相談は受け付けています）" },
+    ja: { open: "ただいま受付中", before: "本日は {o} から受付", after: "本日の受付は終了しました", closed: "本日は定休日です",
+          hours: "（最終受付 {c}・タイ時間）", closedSub: "（LINE のご連絡は受け付けています）" },
     en: { open: "Open now", before: "Opens today at {o}", after: "Closed for today", closed: "Closed today",
-          hours: " (Bangkok time {o}–{c})", closedSub: " (LINE messages welcome)" }
+          hours: " (last booking {c}, Bangkok time)", closedSub: " (LINE messages welcome)" }
   }[lang];
 
   function bangkokNow(date) {
@@ -33,13 +33,12 @@
   var text, sub = "", state;
   if (!hours) { text = T.closed; sub = T.closedSub; state = "is-closed"; }
   else if (now.min < toMin(hours[0])) { text = T.before.replace("{o}", hours[0]); state = "is-closed"; }
-  else if (now.min >= toMin(hours[1])) { text = T.after; state = "is-closed"; }
-  else { text = T.open; sub = T.hours.replace("{o}", hours[0]).replace("{c}", hours[1]); state = "is-open"; }
+  else if (now.min > toMin(hours[1])) { text = T.after; state = "is-closed"; }
+  else { text = T.open; sub = T.hours.replace("{c}", hours[1]); state = "is-open"; }
 
   document.querySelectorAll("[data-status]").forEach(function (el) {
     el.classList.add(state);
     el.querySelector("b").textContent = text;
     el.querySelector("span").textContent = sub;
   });
-
 })();
