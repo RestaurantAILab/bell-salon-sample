@@ -2,6 +2,8 @@
 // index.html の <script src="js/notes.js"> を 1 行消せば完全に外れる。
 // 吹き出しはクリックで消える。左下のボタンで「すべて隠す／もう一度表示」。
 (function () {
+  // ?notes=0 で説明なしの素の状態を表示する（速度計測・納品前確認用）
+  if (new URLSearchParams(location.search).get("notes") === "0") return;
   var NOTES = [
     // type: "good" = 今のサイトから良くなった点 / "check" = 出典・確認してほしい点
     { at: ".hero__cta", type: "good", place: "below", mplace: "above",
@@ -16,7 +18,7 @@
     { at: ".hero__text", type: "check", place: "aside", mplace: "above",
       title: "文章は AI が書いた仮の案です",
       body: "キャッチコピーや説明文はお店の言葉に差し替えられます。" },
-    { at: ".hero > .wrap", mat: ".vows", type: "good", place: "below-right", mplace: "above-right",
+    { at: ".hero > .wrap", mat: ".vows li:first-child", type: "good", place: "below-right", mplace: "above-right",
       title: "表示速度 100 点（今のサイト 47 点）",
       body: "スマホで開いてから表示まで 1.7 秒（今のサイトは 19 秒）。Wix の広告も出ません。" },
     { at: ".letter__sign", type: "check", place: "above-right",
@@ -47,6 +49,7 @@
 
   var css = [
     ".bn-host{position:relative}",
+    ".bn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}",
     ".bn{position:absolute;z-index:25;width:max-content;max-width:min(300px,calc(100vw - 32px));text-align:left;",
     " font:500 13px/1.6 'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',system-ui,sans-serif;letter-spacing:0;",
     " padding:10px 30px 11px 12px;border-radius:12px;cursor:pointer;border:0;box-shadow:0 6px 18px rgba(0,0,0,.16);",
@@ -111,9 +114,8 @@
     b.dataset.place = (n.mplace && !wide) ? n.mplace : n.place;
     if (n.desktopOnly) b.dataset.desktop = "";
     if (n.mobileOnly) b.dataset.mobile = "";
-    b.setAttribute("aria-label", (n.type === "good" ? "改善ポイント：" : "確認ポイント：") + n.title + "。" + n.body + "（クリックで閉じる）");
     b.innerHTML = '<span class="bn-tag">' + (n.type === "good" ? "改善ポイント" : "確認ポイント") + "</span>" +
-      "<b>" + n.title + "</b>" + n.body + '<span class="bn-x" aria-hidden="true">×</span>';
+      "<b>" + n.title + "</b>" + n.body + '<span class="bn-x" aria-hidden="true">×</span><span class="bn-sr">（クリックで閉じる）</span>';
     b.style.animationDelay = (-(i * 0.7) % 3.4) + "s";
     b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); close(b); });
     host.classList.add("bn-host");
@@ -156,7 +158,6 @@
     "要件の整理・デザイン・文章・公開まで AI が行っています。ほかの店舗も同じ手順で、営業の前にサンプルを用意できます。" +
     "<br>吹き出しは「改善ポイント」（今のサイトから良くなった点）と「確認ポイント」（写真の出典・料金など）です。クリックで消えます。" +
     '<span class="bn-x" aria-hidden="true">×</span>';
-  intro.setAttribute("aria-label", "このホームページは AI だけで作りました。説明を閉じる");
   intro.addEventListener("click", function () { intro.classList.add("is-out"); setTimeout(function () { intro.remove(); }, 300); });
   document.body.appendChild(intro);
 })();
