@@ -2,7 +2,7 @@
 // index.html の <script src="js/notes.js"> を 1 行消せば完全に外れる。
 // 吹き出しはクリックで消える。左下のボタンで「すべて隠す／もう一度表示」。
 (function () {
-  // ?notes=0 で説明なしの素の状態を表示する（速度計測・納品前確認用）
+  // ?notes=0 で説明なしの素の状態を表示する（納品前の確認用）
   if (new URLSearchParams(location.search).get("notes") === "0") return;
   var NOTES = [
     // type: "good" = 今のサイトから良くなった点 / "check" = 出典・確認してほしい点
@@ -19,8 +19,8 @@
       title: "文章は AI が書いた仮の案です",
       body: "キャッチコピーや説明文はお店の言葉に差し替えられます。" },
     { at: ".hero > .wrap", mat: ".vows li:first-child", type: "good", place: "below-right", mplace: "above-right",
-      title: "表示速度 100 点（今のサイト 47 点）",
-      body: "スマホで開いてから表示まで 1.7 秒（今のサイトは 19 秒）。Wix の広告も出ません。" },
+      title: "広告なし・スマホで横にずれない",
+      body: "今のサイトは先頭に Wix の広告が出て、スマホでは画面が横にはみ出します。" },
     { at: ".letter__sign", type: "check", place: "above-right",
       title: "店長のお名前・写真をください",
       body: "いまは名前を出していません。いただければ署名と写真を入れます。手紙の文章も AI の仮文です。" },
