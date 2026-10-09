@@ -7,15 +7,15 @@
 
   // type: "update" = 今回良くした点 / "point" = 共有しておきたい情報
   // at / place は PC、mat / mplace はスマホ（無ければ PC と同じ）。
-  // place: below / above / right / below-end / above-end（end = 右端そろえ）
+  // place: below / above / right / below-end / above-end（end = 右端そろえ）/ inside-end（要素の内側の右上）
   var NOTES = [
     { type: "update", at: ".hero__cta", place: "below", mplace: "above",
       title: "最初の画面に予約ボタン",
       body: "予約をしやすくするため、最初の画面に電話・LINE のボタンを置き、スクロール中も画面下に表示するようにしました。" },
-    { type: "update", at: ".hero .status", place: "right", clearOf: ".hero__cta .btn--line", mat: "#access .status", mplace: "above-end",
+    { type: "update", at: ".hero .status", place: "above", mat: "#access .status", mplace: "above-end",
       title: "今日の受付状況を自動表示",
       body: "来店前に受付中かが分かるよう、タイ時間で「受付中／定休日」と最終受付の時刻を自動で表示するようにしました（第 2・第 4 木曜の休みにも対応）。" },
-    { type: "point", at: ".hero__photo", place: "below-end", mat: ".about__photos", mplace: "above-end",
+    { type: "point", at: ".hero__looks li:nth-child(2)", place: "inside-end", mat: ".about__photos", mplace: "above-end",
       title: "写真・掲載内容の出典",
       body: "写真・スタッフ・商品・文章は、公式サイト bellotonagami.com に掲載されている内容をもとにしています。" },
     { type: "update", at: "#menu-cut", place: "below", mat: ".chips", mplace: "below",
@@ -72,7 +72,7 @@
     ".bn-toggle{position:fixed;z-index:35;right:16px;bottom:calc(var(--bar-h,64px) + 14px + env(safe-area-inset-bottom));",
     " min-height:44px;padding:0 16px;border-radius:999px;border:2px solid #111;background:#ffe14d;color:#111;cursor:pointer;",
     " font:800 13px/1 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;box-shadow:3px 3px 0 #111}",
-    "@media (min-width:900px){.bn-toggle{bottom:20px;right:20px}}"
+    "@media (min-width:900px){.bn-toggle{bottom:20px;right:auto;left:20px}}"
   ].join("");
   var style = document.createElement("style");
   style.textContent = css;
@@ -143,14 +143,18 @@
         if (left + w > vw - EDGE) place = "below"; // 右に入らなければ下へ
       }
       var end = /-end$/.test(place);
-      if (place !== "right") {
+      if (place === "inside-end") {
+        left = c.right - w - 20; top = c.top + 20; tail = "none";
+      } else if (place !== "right") {
         left = end ? c.right - w : c.left;
         if (/^above/.test(place)) { top = c.top - h - GAP; tail = "down"; }
         else { top = c.bottom + GAP; tail = "up"; }
       }
       left = Math.max(EDGE, Math.min(left, vw - EDGE - w));
       b.dataset.tail = tail;
-      if (tail === "left") {
+      if (tail === "none") {
+        // しっぽなし
+      } else if (tail === "left") {
         b.style.setProperty("--ty", Math.max(12, Math.min(h - 30, c.top + c.height / 2 - top - 7)) + "px");
       } else {
         // しっぽの先は、中身の左端から少し入ったところ（end のときは右端寄り）
