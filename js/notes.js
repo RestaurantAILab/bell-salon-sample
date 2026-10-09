@@ -50,46 +50,55 @@
   var css = [
     ".bn-host{position:relative}",
     ".bn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}",
+    // サイト（白・黒・ローズ、細い明朝）と混ざらないよう、付箋・ステッカー調にする：
+    // 鮮やかな青／黄、黒の太枠、ずらした影、少し傾ける、ゴシック太字
     ".bn{position:absolute;z-index:25;width:max-content;max-width:min(300px,calc(100vw - 32px));text-align:left;",
-    " font:500 13px/1.6 'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',system-ui,sans-serif;letter-spacing:0;",
-    " padding:10px 30px 11px 12px;border-radius:12px;cursor:pointer;border:0;box-shadow:0 6px 18px rgba(0,0,0,.16);",
+    " font:600 13px/1.6 'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',system-ui,sans-serif;letter-spacing:0;",
+    " padding:10px 32px 12px 12px;border-radius:10px;cursor:pointer;border:2px solid #111;box-shadow:4px 4px 0 #111;",
     " opacity:0;transition:opacity .35s ease,transform .35s ease}",
     ".bn.is-in{opacity:1}",
-    ".bn b{display:block;font-size:14px;font-weight:700;margin-bottom:2px}",
-    ".bn .bn-tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;margin-bottom:4px}",
-    ".bn .bn-x{position:absolute;top:6px;right:8px;font-size:16px;line-height:1;opacity:.7}",
-    ".bn--good{background:#8e5b5f;color:#fff}",
-    ".bn--good .bn-tag{background:#fff;color:#8e5b5f}",
-    ".bn--check{background:#fff8dc;color:#2b2b2b;outline:1px solid #e3cf86}",
-    ".bn--check .bn-tag{background:#2b2b2b;color:#fff8dc}",
-    ".bn::after{content:'';position:absolute;width:12px;height:12px;background:inherit;transform:rotate(45deg)}",
-    ".bn--check::after{outline:1px solid #e3cf86;clip-path:polygon(100% 0,100% 100%,0 100%)}",
-    ".bn[data-place^=below]{top:calc(100% + 12px)}",
-    ".bn[data-place^=below]::after{top:-6px;left:22px;clip-path:polygon(0 0,100% 0,0 100%)}",
-    ".bn[data-place^=above]{bottom:calc(100% + 12px)}",
-    ".bn[data-place^=above]::after{bottom:-6px;left:22px}",
+    ".bn b{display:block;font-size:15px;font-weight:800;margin-bottom:2px;line-height:1.45}",
+    ".bn .bn-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:2px 8px 2px 4px;border-radius:999px;margin-bottom:6px;border:1.5px solid #111}",
+    ".bn .bn-tag i{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;font-style:normal;font-size:11px;line-height:1}",
+    ".bn .bn-x{position:absolute;top:6px;right:8px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;font-size:14px;line-height:1;font-weight:700}",
+    ".bn--good{background:#1d4ed8;color:#fff;rotate:-1deg}",
+    ".bn--good .bn-tag{background:#fff;color:#1d4ed8}",
+    ".bn--good .bn-tag i{background:#1d4ed8;color:#fff}",
+    ".bn--good .bn-x{background:rgba(255,255,255,.18)}",
+    ".bn--check{background:#ffe14d;color:#111;rotate:1deg}",
+    ".bn--check .bn-tag{background:#111;color:#ffe14d}",
+    ".bn--check .bn-tag i{background:#ffe14d;color:#111}",
+    ".bn--check .bn-x{background:rgba(0,0,0,.08)}",
+    ".bn::after{content:'';position:absolute;width:14px;height:14px;background:inherit;border:2px solid #111;transform:rotate(45deg);clip-path:polygon(100% 0,100% 100%,0 100%)}",
+    ".bn[data-place^=below]{top:calc(100% + 14px)}",
+    ".bn[data-place^=below]::after{top:-9px;left:22px;clip-path:polygon(0 0,100% 0,0 100%)}",
+    ".bn[data-place^=above]{bottom:calc(100% + 14px)}",
+    ".bn[data-place^=above]::after{bottom:-9px;left:22px}",
     ".bn[data-place$=right]{right:0}",
     ".bn[data-place$=right]::after{left:auto;right:22px}",
     ".bn:not([data-place$=right]):not([data-place=side]):not([data-place=aside]):not([data-place=inset]){left:0}",
     ".bn[data-place=inset]{top:120px;left:var(--gutter,16px)}",
-    ".bn[data-place=inset]::after{right:-6px;top:26px;clip-path:polygon(0 0,100% 0,100% 100%)}",
+    ".bn[data-place=inset]::after{right:-9px;top:26px;clip-path:polygon(0 0,100% 0,100% 100%)}",
     ".bn[data-place=side]{right:0;top:50%;margin-top:-34px}",
     ".bn[data-place=aside]{left:calc(100% + 24px);top:-8px}",
-    ".bn[data-place=side]::after,.bn[data-place=aside]::after{left:-6px;top:26px;clip-path:polygon(0 0,0 100%,100% 100%)}",
-    ".bn--check[data-place=aside]::after{clip-path:polygon(0 0,0 100%,100% 100%)}",
-    ".bn:focus-visible{outline:3px solid #000;outline-offset:2px}",
+    ".bn[data-place=side]::after,.bn[data-place=aside]::after{left:-9px;top:26px;clip-path:polygon(0 0,0 100%,100% 100%)}",
+    ".bn:focus-visible{outline:3px solid #1d4ed8;outline-offset:3px}",
     ".bn.is-out{opacity:0;transform:scale(.92)}",
     "@media (prefers-reduced-motion:no-preference){.bn.is-in{animation:bn-float 3.4s ease-in-out infinite}}",
     "@keyframes bn-float{0%,100%{translate:0 0}50%{translate:0 -6px}}",
     ".bn-intro{position:fixed;z-index:40;left:50%;top:56px;transform:translateX(-50%);width:min(560px,calc(100vw - 32px));",
-    " background:#000;color:#fff;border-radius:14px;padding:16px 40px 16px 18px;box-shadow:0 12px 32px rgba(0,0,0,.25);",
-    " font:400 14px/1.7 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;cursor:pointer;border:0;text-align:left}",
-    ".bn-intro b{display:block;font-size:16px;margin-bottom:4px}",
-    ".bn-intro .bn-x{position:absolute;top:10px;right:14px;font-size:18px;opacity:.7}",
+    " background:#1d4ed8;color:#fff;border-radius:12px;padding:16px 44px 16px 18px;border:2px solid #111;box-shadow:6px 6px 0 #111;",
+    " font:500 14px/1.7 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;cursor:pointer;text-align:left}",
+    ".bn-intro .bn-from{display:inline-block;font-size:11px;font-weight:800;background:#ffe14d;color:#111;border:1.5px solid #111;border-radius:999px;padding:1px 8px;margin-bottom:6px}",
+    ".bn-intro b{display:block;font-size:17px;font-weight:800;margin-bottom:4px}",
+    ".bn-intro .bn-k{display:inline-block;padding:0 6px;border-radius:4px;border:1.5px solid #111;font-weight:800;font-size:12px}",
+    ".bn-intro .bn-k--good{background:#fff;color:#1d4ed8}",
+    ".bn-intro .bn-k--check{background:#ffe14d;color:#111}",
+    ".bn-intro .bn-x{position:absolute;top:10px;right:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.18);font-size:16px}",
     ".bn-intro.is-out{opacity:0;transition:opacity .3s}",
     ".bn-toggle{position:fixed;z-index:35;right:16px;bottom:calc(var(--bar-h,64px) + 14px + env(safe-area-inset-bottom));",
-    " min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #000;background:#fff;color:#000;cursor:pointer;",
-    " font:700 13px/1 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;box-shadow:0 4px 12px rgba(0,0,0,.12)}",
+    " min-height:44px;padding:0 16px;border-radius:999px;border:2px solid #111;background:#ffe14d;color:#111;cursor:pointer;",
+    " font:800 13px/1 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;box-shadow:3px 3px 0 #111}",
     "@media (min-width:900px){.bn-toggle{bottom:20px;right:auto;left:50%;transform:translateX(-50%)}}",
     "@media (max-width:899px){.bn[data-desktop]{display:none}}",
     "@media (min-width:900px){.bn[data-mobile]{display:none}}"
@@ -116,7 +125,7 @@
     b.dataset.place = (n.mplace && !wide) ? n.mplace : n.place;
     if (n.desktopOnly) b.dataset.desktop = "";
     if (n.mobileOnly) b.dataset.mobile = "";
-    b.innerHTML = '<span class="bn-tag">' + (n.type === "good" ? "改善ポイント" : "確認ポイント") + "</span>" +
+    b.innerHTML = '<span class="bn-tag"><i aria-hidden="true">' + (n.type === "good" ? "✓" : "?") + "</i>" + (n.type === "good" ? "改善ポイント" : "確認ポイント") + "</span>" +
       "<b>" + n.title + "</b>" + n.body + '<span class="bn-x" aria-hidden="true">×</span><span class="bn-sr">（クリックで閉じる）</span>';
     b.style.animationDelay = (-(i * 0.7) % 3.4) + "s";
     b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); close(b); });
@@ -156,9 +165,9 @@
   var intro = document.createElement("button");
   intro.type = "button";
   intro.className = "bn-intro";
-  intro.innerHTML = "<b>このホームページは、AI だけで作りました。</b>" +
+  intro.innerHTML = '<span class="bn-from">Restaurant AI Lab からの説明</span>' + "<b>このホームページは、AI だけで作りました。</b>" +
     "要件の整理・デザイン・文章・公開まで AI が行っています。ほかの店舗も同じ手順で、営業の前にサンプルを用意できます。" +
-    "<br>吹き出しは「改善ポイント」（今のサイトから良くなった点）と「確認ポイント」（写真の出典・料金など）です。クリックで消えます。" +
+    "<br>青い <span class=\"bn-k bn-k--good\">改善ポイント</span> は今のサイトから良くなった点、黄色の <span class=\"bn-k bn-k--check\">確認ポイント</span> は写真の出典や料金などの確認事項です。どれもクリックで消えます。" +
     '<span class="bn-x" aria-hidden="true">×</span>';
   intro.addEventListener("click", function () { intro.classList.add("is-out"); setTimeout(function () { intro.remove(); }, 300); });
   document.body.appendChild(intro);
