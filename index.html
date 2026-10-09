@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>BELL otonagami salon | バンコク・プロンポンの大人髪サロン</title>
+<meta name="description" content="BTSプロンポン駅から徒歩10分、スクンビット49/11の日本人美容室 BELL。全席半個室の大人髪サロン。電話・LINEでその場で予約できます。">
+<meta name="theme-color" content="#1c1a17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<!--
+  店舗サイト雛形（T-0817 サンプル）
+  店舗ごとに差し替えるのは data-edit を付けた箇所だけ。
+  電話・LINE・地図・営業時間は下の <script> の STORE にもまとめてある。
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "BELL otonagami salon",
+  "telephone": "+66-2-000-3001",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "6/13 Sukhumvit 49/11, Khlong Tan Nuea, Watthana",
+    "addressLocality": "Bangkok",
+    "addressCountry": "TH"
+  },
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday","Friday","Saturday","Sunday","Monday"], "opens": "09:00", "closes": "21:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "09:00", "closes": "18:00"}
+  ],
+  "sameAs": ["https://www.instagram.com/bellotonagami/", "https://www.facebook.com/bellotonagami/"]
+}
+</script>
+<style>
+  :root {
+    --ink: #1c1a17;
+    --ink-soft: #4a463f;
+    --muted: #7b756b;
+    --paper: #f7f3ec;
+    --card: #ffffff;
+    --line: #e4ddd1;
+    --brass: #9a7b4f;
+    --brass-dark: #7d6340;
+    --line-green: #06c755;
+    --radius: 14px;
+    --bar-h: 68px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom));
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .serif { font-family: "Noto Serif JP", serif; }
+
+  /* サンプル表示 */
+  .sample-note {
+    background: var(--ink); color: #d9d2c5; font-size: 12px; text-align: center;
+    padding: 6px 16px; letter-spacing: .02em;
+  }
+
+  /* ヘッダー */
+  header.top {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(247, 243, 236, .94);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
+  .brand img { width: 44px; height: auto; }
+  .brand span { font-family: "Noto Serif JP", serif; font-weight: 700; letter-spacing: .18em; font-size: 18px; }
+  nav.links { display: none; gap: 22px; font-size: 14px; }
+  nav.links a { text-decoration: none; color: var(--ink-soft); }
+  nav.links a:hover { color: var(--brass-dark); }
+  .head-tel {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-weight: 700; font-size: 14px; color: var(--ink);
+    border: 1px solid var(--ink); border-radius: 999px; padding: 6px 14px; white-space: nowrap;
+  }
+
+  /* ファーストビュー */
+  .hero { padding: 28px 0 32px; }
+  .hero-grid { display: grid; gap: 24px; }
+  .eyebrow { color: var(--brass-dark); font-size: 13px; letter-spacing: .14em; margin: 0 0 8px; }
+  .hero h1 { font-family: "Noto Serif JP", serif; font-size: 30px; line-height: 1.4; margin: 0 0 12px; letter-spacing: .02em; }
+  .hero p.lead { margin: 0 0 18px; color: var(--ink-soft); }
+  .today {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 12px 14px; margin-bottom: 16px; font-size: 14px;
+  }
+  .status { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+  .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+  .status.open::before { background: #2e9e5b; }
+  .status.closed::before { background: #c0563f; }
+  .today .access { color: var(--ink-soft); }
+
+  .cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 54px; padding: 10px 14px; border-radius: 12px;
+    font-weight: 700; font-size: 16px; text-decoration: none; text-align: center; line-height: 1.3;
+  }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn-tel { background: var(--ink); color: #fff; }
+  .btn-line { background: var(--line-green); color: #fff; }
+  .btn-map { grid-column: 1 / -1; background: var(--card); color: var(--ink); border: 1px solid var(--line); font-weight: 500; }
+  .btn small { display: block; font-weight: 400; font-size: 12px; opacity: .85; }
+
+  .hero-photo { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; background: #ddd; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-photo figcaption {
+    position: absolute; left: 12px; bottom: 12px; background: rgba(28,26,23,.72); color: #fff;
+    font-size: 12px; padding: 4px 10px; border-radius: 999px;
+  }
+
+  /* セクション共通 */
+  section.block { padding: 44px 0; border-top: 1px solid var(--line); }
+  .sec-head { margin-bottom: 20px; }
+  .sec-head .en { color: var(--brass-dark); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; margin: 0; }
+  .sec-head h2 { font-family: "Noto Serif JP", serif; font-size: 24px; margin: 2px 0 0; line-height: 1.4; }
+  .note { font-size: 13px; color: var(--muted); }
+
+  /* 店長 */
+  .manager {
+    display: grid; grid-template-columns: 76px 1fr; gap: 14px; align-items: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px;
+  }
+  .avatar {
+    width: 76px; height: 76px; border-radius: 50%; background: #e9e1d3; color: var(--brass-dark);
+    display: grid; place-items: center; font-family: "Noto Serif JP", serif; font-size: 28px; font-weight: 700;
+  }
+  .manager h3 { margin: 0; font-size: 18px; }
+  .manager .role { margin: 0; color: var(--muted); font-size: 13px; }
+  .manager p.msg { grid-column: 1 / -1; margin: 4px 0 0; color: var(--ink-soft); font-size: 15px; }
+  .manager .cta { grid-column: 1 / -1; }
+
+  /* メニュー */
+  .menu-list { list-style: none; margin: 0; padding: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  .menu-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 1px solid var(--line); }
+  .menu-list li:first-child { border-top: 0; }
+  .menu-list .name { font-weight: 500; }
+  .menu-list .name small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+  .menu-list .price { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu-list li.special { background: #fbf8f2; border-radius: var(--radius) var(--radius) 0 0; }
+  .menu-list li.special .price { color: var(--brass-dark); }
+
+  /* スタイル */
+  .styles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .styles figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .styles img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+  .styles figcaption { padding: 8px 10px; font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* サロン */
+  .about { display: grid; gap: 18px; }
+  .points { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .points li { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+  .points b { display: block; font-size: 16px; }
+  .points span { color: var(--ink-soft); font-size: 14px; }
+
+  /* アクセス */
+  .info { display: grid; gap: 14px; }
+  .info dl { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 16px; }
+  .info dl div { display: grid; grid-template-columns: 84px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .info dl div:first-child { border-top: 0; }
+  .info dt { color: var(--muted); font-size: 14px; }
+  .info dd { margin: 0; overflow-wrap: anywhere; }
+  .map-frame { border: 0; width: 100%; height: 260px; border-radius: var(--radius); background: #e9e4da; }
+
+  footer { padding: 32px 0 24px; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  footer .sns { display: flex; justify-content: center; gap: 18px; margin-bottom: 10px; }
+  footer .sns a { color: var(--ink-soft); }
+
+  /* 画面下の固定バー（スマホ） */
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.97); border-top: 1px solid var(--line);
+    box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+  }
+  .bar a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    height: 52px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700;
+  }
+  .bar a svg { width: 20px; height: 20px; }
+  .bar .b-tel { background: var(--ink); color: #fff; }
+  .bar .b-line { background: var(--line-green); color: #fff; }
+  .bar .b-map { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
+
+  @media (min-width: 760px) {
+    body { padding-bottom: 0; }
+    .bar { display: none; }
+    nav.links { display: flex; }
+    .hero { padding: 48px 0 56px; }
+    .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 40px; }
+    .hero h1 { font-size: 40px; }
+    .styles { grid-template-columns: repeat(4, 1fr); }
+    .about { grid-template-columns: 1fr 1fr; align-items: start; }
+    .info { grid-template-columns: 1fr 1fr; }
+    .map-frame { height: 100%; min-height: 320px; }
+    .manager { grid-template-columns: 96px 1fr 1.2fr; }
+    .manager .avatar { width: 96px; height: 96px; }
+    .manager p.msg { grid-column: 2 / 3; }
+    .manager .cta { grid-column: 3 / 4; grid-row: 1 / 3; grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-note">このページは Restaurant AI Lab による提案用サンプルです（公式サイトではありません）</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="BELL トップへ">
+      <img src="img/logo.png" alt="BELL ロゴ" width="44" height="36">
+      <span>BELL</span>
+    </a>
+    <nav class="links" aria-label="ページ内リンク">
+      <a href="#manager">店長に相談</a>
+      <a href="#menu">メニュー</a>
+      <a href="#styles">スタイル</a>
+      <a href="#access">アクセス</a>
+    </nav>
+    <a class="head-tel" href="tel:+6620003001" data-edit="tel">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+      電話する
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ファーストビュー: 電話・LINE・地図を最初の画面に置く -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">PROFESSIONAL HAIR SALON ・ PHROM PHONG</p>
+        <h1 data-edit="catch">バンコクで、<br>日本品質の大人髪。</h1>
+        <p class="lead" data-edit="lead">全席が仕切られた半個室のプライベートサロンです。日本人スタイリストが、カット・カラー・髪質改善までご相談に乗ります。</p>
+
+        <div class="today" aria-live="polite">
+          <span class="status" id="openStatus">営業時間を確認中</span>
+          <span id="todayHours"></span>
+          <span class="access">BTS プロンポン駅から徒歩 10 分</span>
+        </div>
+
+        <div class="cta">
+          <a class="btn btn-tel" href="tel:+6620003001" data-edit="tel">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+            <span>電話で予約<small>02-000-3001</small></span>
+          </a>
+          <a class="btn btn-line" href="https://line.me/R/ti/p/@skk6845h" target="_blank" rel="noopener" data-edit="line">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5 1.1-.5 5.9-3.5 8.1-6C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+            <span>LINEで相談<small>@skk6845h</small></span>
+          </a>
+          <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=BELL+otonagami+salon+Sukhumvit+49%2F11+Bangkok" target="_blank" rel="noopener" data-edit="map">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            Google マップで道順を見る
+          </a>
+        </div>
+      </div>
+
+      <figure class="hero-photo">
+        <img src="img/rainy.jpg" alt="BELL で仕上げたツヤのあるロングストレート" width="720" height="720" fetchpriority="high">
+        <figcaption>BELL の仕上がり（髪質改善）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 店長に直接つながる -->
+  <section class="block" id="manager">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="en">Talk to the manager</p>
+        <h2>店長に直接、相談できます</h2>
+      </div>
+      <div class="manager">
+        <div class="avatar" aria-hidden="true">店</div>
+        <div>
+          <h3 data-edit="manager-name">店長 ○○ ○○</h3>
+          <p class="role">BELL 店長 ・ 日本人スタイリスト</p>
+        </div>
+        <p class="msg" data-edit="manager-msg">「この色にできる？」「ダメージが心配」など、予約前の相談も LINE でどうぞ。写真を送っていただければ、店長が直接お返事します。</p>
+        <div class="cta">
+          <a class="btn btn-line" href="https://line.me/R/ti/p/@skk6845h" target="_blank" rel="noopener" data-edit="line">LINE で相談</a>
+          <a class="btn btn-tel" href="tel:+6620003001" data-edit="tel">店に電話する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- メニュー -->
+  <section class="block" id="menu">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="en">Menu</p>
+        <h2>メニューと料金</h2>
+      </div>
+      <ul class="menu-list" data-edit="menu">
+        <li class="special"><span class="name">お任せベル<small>経験豊富なスタイリストが、薬剤と知識のすべてを使って仕上げる特別メニュー</small></span><span class="price">8,000B</span></li>
+        <li><span class="name">骨格矯正カット</span><span class="price">1,200B</span></li>
+        <li><span class="name">オーダーメイドカラー</span><span class="price">2,000B〜</span></li>
+        <li><span class="name">髪質改善ストレートパーマ</span><span class="price">2,500B〜</span></li>
+        <li><span class="name">パームパーマ</span><span class="price">3,000B〜</span></li>
+        <li><span class="name">ディープトリートメント</span><span class="price">1,500B</span></li>
+        <li><span class="name">クレンジングヘッドスパ</span><span class="price">500B</span></li>
+        <li><span class="name">増毛・ヘアコンタクト<small>日本の特許技術による施術</small></span><span class="price">要相談</span></li>
+      </ul>
+      <p class="note">料金は税・サービス料の扱いを含め、ご予約時にご確認ください。</p>
+    </div>
+  </section>
+
+  <!-- スタイル写真 -->
+  <section class="block" id="styles">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="en">Styles</p>
+        <h2>BELL の仕上がり</h2>
+      </div>
+      <div class="styles">
+        <figure><img src="img/treatment.jpg" alt="トリートメント前後の比較" width="720" height="720" loading="lazy"><figcaption>次世代トリートメント（左：施術前 / 右：施術後）</figcaption></figure>
+        <figure><img src="img/color.jpg" alt="カラーの施術前後の比較" width="720" height="720" loading="lazy"><figcaption>ダメージを抑えたカラー（左：施術前 / 右：施術後）</figcaption></figure>
+        <figure><img src="img/trend.jpg" alt="ピンク系のヘアカラーとウェーブ" width="720" height="720" loading="lazy"><figcaption>今年の髪色：ピンクブラウン</figcaption></figure>
+        <figure><img src="img/rainy.jpg" alt="ツヤのあるロングストレート" width="720" height="720" loading="lazy"><figcaption>雨季でも広がらない髪質改善</figcaption></figure>
+      </div>
+      <p class="note">ほかのスタイルは <a href="https://www.instagram.com/bellotonagami/" target="_blank" rel="noopener">Instagram @bellotonagami</a> でご覧いただけます。</p>
+    </div>
+  </section>
+
+  <!-- サロンについて -->
+  <section class="block" id="about">
+    <div class="wrap about">
+      <div>
+        <div class="sec-head">
+          <p class="en">About</p>
+          <h2>海外にいることを忘れる、<br>大人のためのサロン</h2>
+        </div>
+        <p data-edit="about">扉を開けると、全席が仕切られたヘアブース。あなただけのプライベートサロンで、日々の疲れを忘れてゆったり過ごしていただけます。</p>
+        <ul class="points">
+          <li><b>全席が半個室</b><span>周りを気にせず、相談しながら施術を受けられます。</span></li>
+          <li><b>日本人スタイリスト在籍</b><span>日本語で細かいニュアンスまで伝わります。</span></li>
+          <li><b>日本の最新技術</b><span>髪質改善・ヘアコンタクト・増毛まで対応します。</span></li>
+        </ul>
+      </div>
+      <figure class="hero-photo">
+        <img src="img/training.jpg" alt="BELL のスタッフ研修の集合写真" width="720" height="720" loading="lazy">
+        <figcaption>スタッフ研修（2019 年）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section class="block" id="access">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="en">Access</p>
+        <h2>店舗情報・アクセス</h2>
+      </div>
+      <div class="info">
+        <dl data-edit="info">
+          <div><dt>住所</dt><dd>6/13 Sukhumvit 49/11, Khlong Tan Nuea, Watthana, Bangkok</dd></div>
+          <div><dt>最寄り駅</dt><dd>BTS プロンポン駅から徒歩約 10 分</dd></div>
+          <div><dt>営業時間</dt><dd>木〜月 9:00〜21:00<br>火 9:00〜18:00</dd></div>
+          <div><dt>定休日</dt><dd>水曜日、第 2・第 4 木曜日</dd></div>
+          <div><dt>電話</dt><dd><a href="tel:+6620003001">02-000-3001</a></dd></div>
+          <div><dt>LINE</dt><dd><a href="https://line.me/R/ti/p/@skk6845h" target="_blank" rel="noopener">@skk6845h</a></dd></div>
+        </dl>
+        <iframe class="map-frame" title="BELL の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=Sukhumvit%2049%2F11%2C%20Khlong%20Tan%20Nuea%2C%20Watthana%2C%20Bangkok&z=16&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sns">
+      <a href="https://www.instagram.com/bellotonagami/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/bellotonagami/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.youtube.com/channel/UC8QdLEK5z_-ltYk2u93brHw/" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div>BELL otonagami salon ・ SWAG OTONAGAMI COMPANY</div>
+  </div>
+</footer>
+
+<!-- スマホでは画面下に常に電話・LINE・地図を出す -->
+<nav class="bar" aria-label="予約・お問い合わせ">
+  <a class="b-tel" href="tel:+6620003001" data-edit="tel">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>電話
+  </a>
+  <a class="b-line" href="https://line.me/R/ti/p/@skk6845h" target="_blank" rel="noopener" data-edit="line">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5 1.1-.5 5.9-3.5 8.1-6C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>LINE
+  </a>
+  <a class="b-map" href="https://www.google.com/maps/search/?api=1&query=BELL+otonagami+salon+Sukhumvit+49%2F11+Bangkok" target="_blank" rel="noopener" data-edit="map">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>地図
+  </a>
+</nav>
+
+<script>
+  // 店舗ごとに差し替える営業時間（曜日: 0=日〜6=土）。null は定休日。
+  const STORE = {
+    timeZone: "Asia/Bangkok",
+    hours: { 0: ["09:00", "21:00"], 1: ["09:00", "21:00"], 2: ["09:00", "18:00"], 3: null,
+             4: ["09:00", "21:00"], 5: ["09:00", "21:00"], 6: ["09:00", "21:00"] },
+    closedThursdays: [2, 4] // 第 2・第 4 木曜は休み
+  };
+
+  (function showToday() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: STORE.timeZone, weekday: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false
+    }).formatToParts(new Date());
+    const get = (t) => parts.find((p) => p.type === t).value;
+    const dow = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(get("weekday"));
+    const day = Number(get("day"));
+    const now = Number(get("hour")) % 24 * 60 + Number(get("minute"));
+    const nth = Math.ceil(day / 7);
+
+    let hours = STORE.hours[dow];
+    if (dow === 4 && STORE.closedThursdays.includes(nth)) hours = null;
+
+    const status = document.getElementById("openStatus");
+    const label = document.getElementById("todayHours");
+    if (!hours) {
+      status.textContent = "本日は定休日";
+      status.className = "status closed";
+      label.textContent = "LINE のご相談は受け付けています";
+      return;
+    }
+    const toMin = (s) => Number(s.slice(0, 2)) * 60 + Number(s.slice(3));
+    const open = now >= toMin(hours[0]) && now < toMin(hours[1]);
+    status.textContent = open ? "ただいま営業中" : "本日の営業時間外";
+    status.className = "status " + (open ? "open" : "closed");
+    label.textContent = "本日 " + hours[0] + "〜" + hours[1] + "（タイ時間）";
+  })();
+</script>
+</body>
+</html>
