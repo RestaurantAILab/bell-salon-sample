@@ -15,7 +15,7 @@
     { type: "update", at: ".hero .status", place: "above", mat: "#access .status", mplace: "above-end",
       title: "今日の受付状況を自動表示",
       body: "来店前に受付中かが分かるよう、タイ時間で「受付中／定休日」と最終受付の時刻を自動で表示するようにしました（第 2・第 4 木曜の休みにも対応）。" },
-    { type: "point", at: ".hero__looks li:nth-child(2)", place: "inside-end", mat: ".about__photos", mplace: "above-end",
+    { type: "point", at: function () { return document.documentElement.dataset.hero === "looks" ? ".hero__looks li:nth-child(2)" : document.documentElement.dataset.hero === "space" ? ".hero__space" : ".about__photos"; }, place: "inside-end", mat: ".about__photos", mplace: "above-end",
       title: "写真・掲載内容の出典",
       body: "写真・スタッフ・商品・文章は、公式サイト bellotonagami.com に掲載されている内容をもとにしています。" },
     { type: "update", at: "#menu-cut", place: "below", mat: ".chips", mplace: "below",
@@ -75,7 +75,13 @@
     ".bn-toggle{position:fixed;z-index:35;right:16px;bottom:calc(var(--bar-h,64px) + 14px + env(safe-area-inset-bottom));",
     " min-height:44px;padding:0 16px;border-radius:999px;border:2px solid #111;background:#ffe14d;color:#111;cursor:pointer;",
     " font:800 13px/1 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;box-shadow:3px 3px 0 #111}",
-    "@media (min-width:900px){.bn-toggle{bottom:20px;right:auto;left:20px}}"
+    "@media (min-width:900px){.bn-toggle{bottom:20px;right:auto;left:20px}}",
+    ".bn-switch{position:fixed;z-index:35;left:50%;transform:translateX(-50%);top:calc(var(--head-h,56px) + 40px);display:flex;align-items:center;gap:4px;",
+    " padding:4px 4px 4px 12px;border-radius:999px;border:2px solid #111;background:#ffe14d;box-shadow:3px 3px 0 #111;",
+    " font:800 12px/1 'Hiragino Sans','Noto Sans JP',system-ui,sans-serif;color:#111;white-space:nowrap}",
+    ".bn-switch a{display:inline-grid;place-items:center;min-height:32px;padding:0 10px;border-radius:999px;color:#111;text-decoration:none}",
+    ".bn-switch a[aria-current]{background:#111;color:#ffe14d}",
+    "@media (max-width:899px){.bn-switch{top:auto;bottom:calc(var(--bar-h,64px) + 70px + env(safe-area-inset-bottom));left:16px;transform:none}}"
   ].join("");
   var style = document.createElement("style");
   style.textContent = css;
@@ -127,7 +133,8 @@
     var sx = window.scrollX, sy = window.scrollY;
     items.forEach(function (it) {
       var n = it.n, b = it.el;
-      var host = document.querySelector((!wide && n.mat) ? n.mat : n.at);
+      var sel = (!wide && n.mat) ? n.mat : (typeof n.at === "function" ? n.at() : n.at);
+      var host = document.querySelector(sel);
       if (it.closed || !host || !host.getClientRects().length) { b.hidden = true; return; }
       b.hidden = false;
       var place = (!wide && n.mplace) ? n.mplace : n.place;
@@ -195,6 +202,17 @@
   window.addEventListener("load", relayout);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
   if (window.ResizeObserver) new ResizeObserver(relayout).observe(document.querySelector("main") || document.body);
+
+  // トップ（ヒーロー）の見せ方を切り替える（?hero=space|mark|looks）
+  var sw = document.createElement("nav");
+  sw.className = "bn-switch";
+  sw.setAttribute("aria-label", "トップの案");
+  var cur = document.documentElement.dataset.hero;
+  sw.innerHTML = "トップの案" + [["space", "A 空間"], ["mark", "B ロゴ"], ["looks", "C 髪型"]].map(function (o) {
+    var q = new URLSearchParams(location.search); q.set("hero", o[0]);
+    return '<a href="?' + q.toString() + '"' + (o[0] === cur ? ' aria-current="true"' : "") + ">" + o[1] + "</a>";
+  }).join("");
+  document.body.appendChild(sw);
 
   var toggle = document.createElement("button");
   toggle.type = "button";
