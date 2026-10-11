@@ -1,4 +1,4 @@
-/* No requests are made until the visitor explicitly chooses to load the map. */
+/* 受付状況の表示（タイ時間）。 */
 (() => {
   'use strict';
   const formatter = new Intl.DateTimeFormat('en-GB', {
@@ -27,12 +27,4 @@
   setInterval(updateReception, 30000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) updateReception(); });
 
-  document.getElementById('load-map').addEventListener('click', () => {
-    const template = document.getElementById('map-template');
-    const iframe = template.content.firstElementChild.cloneNode(true);
-    iframe.src = iframe.dataset.src;
-    iframe.tabIndex = 0;
-    document.querySelector('.map-placeholder').replaceWith(iframe);
-    iframe.focus();
-  });
 })();
